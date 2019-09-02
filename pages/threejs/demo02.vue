@@ -1,5 +1,5 @@
 <template>
-  <div id="demo-01"></div>
+  <div id="demo-02"></div>
 </template>
 
 <script>
@@ -24,33 +24,30 @@ export default {
       const scene = new THREE.Scene()
       // 创建一个视角
       const camera = new THREE.PerspectiveCamera(
-        75,
+        45,
         window.innerWidth / window.innerHeight,
-        0.1,
-        1000
+        1,
+        500
       )
+      camera.position.set(0, 0, 100)
+      camera.lookAt(0, 0, 0)
       // 创建一个渲染器，并插入到文档中
       const renderer = new THREE.WebGLRenderer()
       renderer.setSize(window.innerWidth, window.innerHeight)
-      document.getElementById('demo-01').appendChild(renderer.domElement)
-      // 创建一个几何体
-      const geometry = new THREE.BoxGeometry(1, 1, 1)
+      document.getElementById('demo-02').appendChild(renderer.domElement)
       // 创建一个材质对象
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-      // 网格?
-      const cube = new THREE.Mesh(geometry, material)
+      const material = new THREE.LineBasicMaterial({ color: 0x0000ff })
+      // 创建一个几何体
+      const geometry = new THREE.Geometry()
+      // 绘制三个向量（点？）
+      geometry.vertices.push(new THREE.Vector3(-10, 0, 0))
+      geometry.vertices.push(new THREE.Vector3(0, 10, 0))
+      geometry.vertices.push(new THREE.Vector3(10, 0, 0))
+      // 线条（点，材质）
+      const line = new THREE.Line(geometry, material)
       // 将物体添加到场景中，默认会在（0, 0, 0）坐标，视角（camera）也在这个坐标
-      scene.add(cube)
-      // 把视角外移，这样就能看到立方体了
-      camera.position.z = 5
-      // 真正的开始持续渲染！全投影开始，持续性保持！trace on！
-      const animate = () => {
-        requestAnimationFrame(animate)
-        renderer.render(scene, camera)
-        cube.rotation.x += 0.01
-        cube.rotation.y += 0.01
-      }
-      animate()
+      scene.add(line)
+      renderer.render(scene, camera)
     }
   }
 }
