@@ -26,7 +26,7 @@ export default {
       const canvas = document.getElementById('demo-03')
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
-      const fov = 75 // 视角的角度（眼镜的开口角度）
+      const fov = 75 // 视角竖直方向的角度（眼镜的开口角度）
       const aspect = window.innerWidth / window.innerHeight // 画布的宽：画布的高
       const near = 0.1 // 近处（距离视角 camera 0.1 以下的对不渲染）
       const far = 5 // 远处（距离视角 camera 5 以上的对不渲染）
@@ -60,6 +60,26 @@ export default {
 
       const renderer = new THREE.WebGLRenderer({ canvas })
 
+      /**
+       * 当 canvas 的宽高和 canvas 展示的宽高（类似于图片本身的宽高和展示的宽高）不同时，就 reset 它
+       * @param renderer
+       * @returns {boolean}
+       */
+      const resizeRendererToDisplaySize = renderer => {
+        const canvas = renderer.domElement
+        const pixelRatio = window.devicePixelRatio
+        const width = (canvas.clientWidth * pixelRatio) | 0
+        const height = (canvas.clientHeight * pixelRatio) | 0
+        const needResize = canvas.width !== width || canvas.height !== height
+        if (needResize) {
+          /**
+           * setSize 第三个参数默认为 true，会设置 canvas 的尺寸，在这个地方我们不希望它去改变它
+           */
+          renderer.setSize(width, height, false)
+        }
+        return needResize
+      }
+
       // 持续投影开始
       const render = time => {
         time *= 0.001 // convert time to seconds
@@ -70,6 +90,12 @@ export default {
           cube.rotation.x = rot
           cube.rotation.y = rot
         })
+        if (resizeRendererToDisplaySize(renderer)) {
+          // 响应式的更新尺寸
+          const canvas = renderer.domElement
+          camera.aspect = canvas.clientWidth / canvas.clientHeight
+          camera.updateProjectionMatrix()
+        }
 
         renderer.render(scene, camera)
         requestAnimationFrame(render)
