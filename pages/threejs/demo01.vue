@@ -35,7 +35,7 @@ export default {
       document.getElementById('demo-01').appendChild(renderer.domElement)
       // 创建一个立方体
       const geometry = new THREE.BoxGeometry(1, 1, 1)
-      // 创建一个材质对象
+      // 创建一个材质对象，MeshBasicMaterial 这种材质不受光影响
       const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
       // 网格?
       const cube = new THREE.Mesh(geometry, material)

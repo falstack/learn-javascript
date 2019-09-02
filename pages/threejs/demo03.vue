@@ -20,25 +20,63 @@ export default {
   },
   methods: {
     init() {
+      // 想象一个空间
       const scene = new THREE.Scene()
+      // 想象一张画布
       const canvas = document.getElementById('demo-03')
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
-      const renderer = new THREE.WebGLRenderer({ canvas })
       const fov = 75 // 视角的角度（眼镜的开口角度）
-      const aspect = window.innerWidth / window.innerHeight // 大概就是 far / far处的画布宽度 = 2
+      const aspect = window.innerWidth / window.innerHeight // 画布的宽：画布的高
       const near = 0.1 // 近处（距离视角 camera 0.1 以下的对不渲染）
       const far = 5 // 远处（距离视角 camera 5 以上的对不渲染）
+      // 想象一个观测点
       const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
       camera.position.z = 2
-      const boxWidth = 1
-      const boxHeight = 1
-      const boxDepth = 1
-      const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth)
-      const material = new THREE.MeshBasicMaterial({ color: 0x44aa88 })
-      const cube = new THREE.Mesh(geometry, material)
-      scene.add(cube)
-      renderer.render(scene, camera)
+      // 方向灯（想象一个光源）
+      const light = new THREE.DirectionalLight(0xffffff, 1)
+      light.position.set(-1, 2, 4)
+      scene.add(light)
+
+      const makeInstance = (color, x) => {
+        // MeshPhongMaterial 这种材质受光影响
+        const material = new THREE.MeshPhongMaterial({ color })
+        const geometry = new THREE.BoxGeometry(1, 1, 1)
+
+        const cube = new THREE.Mesh(geometry, material)
+        scene.add(cube)
+
+        cube.position.x = x
+
+        return cube
+      }
+
+      // 想象三个几何体
+      const cubes = [
+        makeInstance(0x44aa88, 0),
+        makeInstance(0x8844aa, -2),
+        makeInstance(0xaa8844, 2)
+      ]
+
+      const renderer = new THREE.WebGLRenderer({ canvas })
+
+      // 持续投影开始
+      const render = time => {
+        time *= 0.001 // convert time to seconds
+
+        cubes.forEach((cube, ndx) => {
+          const speed = 1 + ndx * 0.1
+          const rot = time * speed
+          cube.rotation.x = rot
+          cube.rotation.y = rot
+        })
+
+        renderer.render(scene, camera)
+        requestAnimationFrame(render)
+      }
+
+      // 全投影开始
+      requestAnimationFrame(render)
     }
   }
 }
