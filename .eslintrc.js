@@ -18,6 +18,7 @@ module.exports = {
     'prettier'
   ],
   rules: {
-    'nuxt/no-cjs-in-config': 'off'
+    'nuxt/no-cjs-in-config': 'off',
+    'unicorn/number-literal-case': 'off'
   }
 }
