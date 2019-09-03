@@ -23,12 +23,7 @@ export default {
       // 创建一个场景
       const scene = new THREE.Scene()
       // 创建一个视角
-      const camera = new THREE.PerspectiveCamera(
-        45,
-        window.innerWidth / window.innerHeight,
-        1,
-        500
-      )
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500)
       camera.position.set(0, 0, 100)
       camera.lookAt(0, 0, 0)
       // 创建一个渲染器，并插入到文档中

@@ -52,11 +52,7 @@ export default {
       }
 
       // 想象三个几何体
-      const cubes = [
-        makeInstance(0x44aa88, 0),
-        makeInstance(0x8844aa, -2),
-        makeInstance(0xaa8844, 2)
-      ]
+      const cubes = [makeInstance(0x44aa88, 0), makeInstance(0x8844aa, -2), makeInstance(0xaa8844, 2)]
 
       const renderer = new THREE.WebGLRenderer({ canvas })
 
