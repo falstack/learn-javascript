@@ -53,7 +53,10 @@ export default {
       // 创建材质
       const createMaterial = () => {
         const material = new THREE.MeshPhongMaterial({
-          side: THREE.DoubleSide
+          color: 0x156289,
+          emissive: 0x072534,
+          side: THREE.DoubleSide,
+          flatShading: true
         })
 
         const hue = Math.random()
@@ -77,20 +80,35 @@ export default {
         addObject(x, y, mesh)
       }
 
+      // 立方体
       addSolidGeometry(-2, 2, new THREE.BoxBufferGeometry(8, 8, 8))
+      // 圆
       addSolidGeometry(-1, 2, new THREE.CircleBufferGeometry(7, 24))
+      // 锥
       addSolidGeometry(0, 2, new THREE.ConeBufferGeometry(6, 8, 16))
+      // 柱
       addSolidGeometry(1, 2, new THREE.CylinderBufferGeometry(4, 4, 8, 12))
+      // 十二面体
       addSolidGeometry(2, 2, new THREE.DodecahedronBufferGeometry(7))
+      // 二十面体
       addSolidGeometry(-2, 1, new THREE.IcosahedronBufferGeometry(7))
+      // 八面体
       addSolidGeometry(-1, 1, new THREE.OctahedronBufferGeometry(7))
+      // 平面
       addSolidGeometry(0, 1, new THREE.PlaneBufferGeometry(9, 9, 2, 2))
+      // 2D圆环
       addSolidGeometry(1, 1, new THREE.RingBufferGeometry(2, 7, 18))
+      // 球
       addSolidGeometry(2, 1, new THREE.SphereBufferGeometry(7, 12, 8))
+      // 四面体
       addSolidGeometry(-2, 0, new THREE.TetrahedronBufferGeometry(7))
+      // 3D圆环
       addSolidGeometry(-1, 0, new THREE.TorusBufferGeometry(5, 2, 8, 24))
+      // 3D圆环结
       addSolidGeometry(0, 0, new THREE.TorusKnotBufferGeometry(3.5, 1.5, 8, 64, 2, 3))
+      // 边框
       addLineGeometry(1, 0, new THREE.EdgesGeometry(new THREE.BoxBufferGeometry(8, 8, 8)))
+      // 线框
       addLineGeometry(2, 0, new THREE.WireframeGeometry(new THREE.BoxBufferGeometry(8, 8, 8)))
       {
         const shape = new THREE.Shape()
@@ -112,7 +130,7 @@ export default {
           bevelSize: 1,
           bevelSegments: 2
         }
-
+        // 心形
         addSolidGeometry(-2, -1, new THREE.ExtrudeBufferGeometry(shape, extrudeSettings))
       }
       {
@@ -143,7 +161,7 @@ export default {
 
           target.set(x, y, z).multiplyScalar(0.75)
         }
-
+        // 参数体
         addSolidGeometry(0, -1, new THREE.ParametricBufferGeometry(klein, 26, 25))
       }
       {
@@ -151,6 +169,7 @@ export default {
         const indicesOfFaces = [2, 1, 0, 0, 3, 2, 0, 4, 7, 7, 3, 0, 0, 1, 5, 5, 4, 0, 1, 2, 6, 6, 5, 1, 2, 3, 7, 7, 6, 2, 4, 5, 6, 6, 7, 4]
         const radius = 7
         const detail = 2
+        // 多面体
         addSolidGeometry(1, -1, new THREE.PolyhedronBufferGeometry(verticesOfCube, indicesOfFaces, radius, detail))
       }
       {
