@@ -6,5 +6,18 @@ module.exports = {
   themeConfig: {
     author: '冰淤'
   },
-  plugins: ['permalink-pinyin']
+  plugins: [
+    'clean-urls',
+    'permalink-pinyin',
+    ['vuepress-plugin-zooming', {
+      selector: '.content__default :not(a) > img',
+    }],
+    'vuepress-plugin-nprogress',
+    ['mathjax', {
+      target: 'svg',
+      macros: {
+        '*': '\\times',
+      },
+    }],
+  ]
 }
