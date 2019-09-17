@@ -8,7 +8,7 @@ module.exports = {
     author: '冰淤'
   },
   head: [
-    ['link', { rel: 'shortcut icon', href: '/favicon.png' }]
+    ['link', { rel: 'shortcut icon', href: '/favicon.ico' }]
   ],
   plugins: [
     'clean-urls',
