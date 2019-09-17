@@ -3,9 +3,13 @@ module.exports = {
   title: '{ do something }',
   description: '用简单的言语，表达超载的心',
   theme: 'simple',
+  evergreen: true,
   themeConfig: {
     author: '冰淤'
   },
+  head: [
+    ['link', { rel: 'shortcut icon', href: '/favicon.png' }]
+  ],
   plugins: [
     'clean-urls',
     'permalink-pinyin',
