@@ -11,7 +11,6 @@ module.exports = {
     ['link', { rel: 'shortcut icon', href: '/favicon.ico' }]
   ],
   plugins: [
-    'clean-urls',
     'permalink-pinyin',
     ['vuepress-plugin-zooming', {
       selector: '.content__default :not(a) > img',
