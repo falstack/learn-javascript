@@ -214,6 +214,7 @@ export default {
             super()
             this.scale = scale
           }
+
           getPoint(t) {
             const tx = t * 3 - 1.5
             const ty = Math.sin(2 * Math.PI * t)
