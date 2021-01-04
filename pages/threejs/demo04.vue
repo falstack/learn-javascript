@@ -187,7 +187,7 @@ export default {
       }
       {
         const loader = new THREE.FontLoader()
-        loader.load('https://threejsfundamentals.org/threejs/resources/threejs/fonts/helvetiker_regular.typeface.json', font => {
+        loader.load('https://threejsfundamentals.org/threejs/resources/threejs/fonts/helvetiker_regular.typeface.json', (font) => {
           const geometry = new THREE.TextBufferGeometry('three.js', {
             font,
             size: 3.0,
@@ -231,7 +231,7 @@ export default {
         addSolidGeometry(1, -2, new THREE.TubeBufferGeometry(path, tubularSegments, radius, radialSegments, closed))
       }
 
-      const resizeRendererToDisplaySize = renderer => {
+      const resizeRendererToDisplaySize = (renderer) => {
         const canvas = renderer.domElement
         const width = canvas.clientWidth
         const height = canvas.clientHeight
@@ -242,7 +242,7 @@ export default {
         return needResize
       }
 
-      const render = time => {
+      const render = (time) => {
         time *= 0.001
 
         if (resizeRendererToDisplaySize(renderer)) {

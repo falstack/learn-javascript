@@ -61,7 +61,7 @@ export default {
        * @param renderer
        * @returns {boolean}
        */
-      const resizeRendererToDisplaySize = renderer => {
+      const resizeRendererToDisplaySize = (renderer) => {
         const canvas = renderer.domElement
         const pixelRatio = window.devicePixelRatio
         const width = (canvas.clientWidth * pixelRatio) | 0
@@ -77,7 +77,7 @@ export default {
       }
 
       // 持续投影开始
-      const render = time => {
+      const render = (time) => {
         time *= 0.001 // convert time to seconds
 
         cubes.forEach((cube, ndx) => {
